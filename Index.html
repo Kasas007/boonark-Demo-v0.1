@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boonark</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+</head>
+<body>
+   <!-- Navigation Bar -->
+   <nav-bar></nav-bar>
+
+    <main>
+        <section class="hero-section">
+            <video autoplay muted loop playsinline class="hero-video">
+                <source src="/video/Hero-video.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">Boonark</h1>
+                <p class="hero-subtitle">ประสบการณ์อาหารที่คุณจะไม่ลืม</p>
+                <button class="btn btn-warning fw-bold px-5 py-2 rounded-pill fs-5">จองเลย</button>
+            </div>
+        </section>
+
+
+        <section class="menu-section" id="menu">
+            <div class="menu-section-overlay"></div>
+            <div class="container menu-section-content">
+                <div class="menu-header">
+                    <h2 class="menu-heading">5 เมนูเด็ดประจำร้าน</h2>
+                </div>
+
+                <div class="featured-info-wrap" id="featuredInfo">
+                    <div class="featured-slide active">
+                        <span class="menu-badge-lg">อาหารเรียกน้ำย่อย</span>
+                        <h3 class="featured-title">ยำวุ้นเส้น</h3>
+                        <p class="featured-desc">วุ้นเส้นยำรสจัดจ้าน กุ้งสด ผักกรอบ เคล้าน้ำยำสูตรเด็ด</p>
+                        <span class="featured-price">฿120</span>
+                    </div>
+                    <div class="featured-slide">
+                        <span class="menu-badge-lg">อาหารจานหลัก</span>
+                        <h3 class="featured-title">ข้าวผัดปู</h3>
+                        <p class="featured-desc">ข้าวผัดปูเนื้อแน่น ไข่ไก่ กลิ่นหอมน้ำมันงา ปรุงสดใหม่ทุกจาน</p>
+                        <span class="featured-price">฿180</span>
+                    </div>
+                    <div class="featured-slide">
+                        <span class="menu-badge-lg">อาหารจานหลัก</span>
+                        <h3 class="featured-title">ต้มยำกุ้ง</h3>
+                        <p class="featured-desc">ต้มยำน้ำข้นกุ้งแม่น้ำ สมุนไพรหอมกลิ่นแรง รสชาติดั้งเดิม</p>
+                        <span class="featured-price">฿220</span>
+                    </div>
+                    <div class="featured-slide">
+                        <span class="menu-badge-lg">ของหวาน</span>
+                        <h3 class="featured-title">ข้าวเหนียวมะม่วง</h3>
+                        <p class="featured-desc">มะม่วงน้ำดอกไม้สุกหวาน ข้าวเหนียวมูนกะทิสดกลิ่นหอม</p>
+                        <span class="featured-price">฿90</span>
+                    </div>
+                    <div class="featured-slide">
+                        <span class="menu-badge-lg">เครื่องดื่ม</span>
+                        <h3 class="featured-title">น้ำมะพร้าวสด</h3>
+                        <p class="featured-desc">มะพร้าวน้ำหอมเย็นสดชื่น เสิร์ฟพร้อมเนื้อมะพร้าวอ่อน</p>
+                        <span class="featured-price">฿65</span>
+                    </div>
+                </div>
+
+                <div class="carousel-controls">
+                    <button class="carousel-btn prev" id="prevBtn">&#8249;</button>
+                    <div class="carousel-dots" id="carouselDots">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <button class="carousel-btn next" id="nextBtn">&#8250;</button>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+    
+    <!--  Footer component -->
+    <site-footer></site-footer>
+
+
+    <!--scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+</html>
