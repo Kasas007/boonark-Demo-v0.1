@@ -321,8 +321,8 @@
 }
 
 #mainNav.scrolled {
-    background: rgba(13, 110, 253, 0.95) !important;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+    background: rgba(13, 26, 58, 0.97) !important;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
     padding: 0.5rem 0;
 }
 

@@ -1,4 +1,5 @@
 
+    // สไลด์โชว์ในหน้าเมนู home page
     if (document.getElementById('nextBtn')) {
         const slides = document.querySelectorAll('.featured-slide');
         const dots = document.querySelectorAll('.dot');
@@ -39,14 +40,14 @@
 
         startAuto();
     }
-
+    // เปลี่ยนสี navbar เมื่อ scroll
     window.addEventListener('scroll', () => {
         const nav = document.getElementById('mainNav');
         if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
     });
 
 
-    // components/navbar.js
+    // components navbar and footer
     class NavBar extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
@@ -72,7 +73,7 @@
                         <a class="nav-link" href="checkticket.html">เช็คคูปอง</a>
                     </li>
                     <li class="nav-item ms-2">
-                        <button class="btn btn-warning fw-bold px-4 rounded-pill">จองเลย</button>
+                        <button class="btn btn-warning fw-bold px-4 rounded-pill" id="bookNowBtn"><a href="booking.html" class="text-decoration-none text-black">จองเลย</a></button>
                     </li>
                 </ul>
             </div>
