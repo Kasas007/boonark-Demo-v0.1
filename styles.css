@@ -681,3 +681,25 @@
     .course-dot { display: none; }
     .calendar-widget { padding: 1rem; }
 }
+
+/* FullCalendar event title — truncate ยาวเกิน */
+.fc-event-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.fc .ticketed {
+    background-color: #b8860b;
+    border-color: #b8860b;
+    border-radius: 4px;
+}
+
+.fc .full {
+    background-color: #3a3a3a;
+    border-color: #555;
+    border-radius: 4px;
+    opacity: 0.6;
+}

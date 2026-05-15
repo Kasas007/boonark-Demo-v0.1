@@ -1,4 +1,4 @@
-
+    const BASE_URL = 'http://localhost:3001';
     // สไลด์โชว์ในหน้าเมนู home page
     if (document.getElementById('nextBtn')) {
         const slides = document.querySelectorAll('.featured-slide');
@@ -122,52 +122,63 @@
     }
     customElements.define('site-footer', Footer);
 
-    document.addEventListener('DOMContentLoaded', function () {
+
+
+    document.addEventListener('DOMContentLoaded', async function () {
+        try {
         const calendarEl = document.getElementById('calendar');
         if (!calendarEl) return;
+        
+       
+        const response = await axios.get(`${BASE_URL}/courses`);
+        console.log('Course Data:', response.data);
 
-        const courses = {
-            '2026-05-16': [{ name: 'คอร์สต้มยำกุ้ง & แกงเขียวหวาน', time: '09:00–14:00', slots: 6 }],
-            '2026-05-23': [{ name: 'คอร์สผัดไทย & ข้าวผัดกะเพรา', time: '09:00–14:00', slots: 6 }],
-            '2026-05-30': [{ name: 'คอร์สขนมไทย & ของหวาน', time: '09:00–13:00', slots: 4 }],
-            '2026-06-06': [{ name: 'คอร์สต้มยำกุ้ง & แกงเขียวหวาน', time: '09:00–14:00', slots: 6 }],
-            '2026-06-13': [{ name: 'คอร์สผัดไทย & ข้าวผัดกะเพรา', time: '09:00–14:00', slots: 0 }],
-            '2026-06-20': [{ name: 'คอร์สขนมไทย & ของหวาน', time: '09:00–13:00', slots: 2 }],
-        };
+        const courses = {};
+        response.data.forEach(c => {
+            if (!courses[c.course_date]) courses[c.course_date] = [];
+            courses[c.course_date].push({ name: c.course_name, slots: c.slots, price: c.course_price });
+        });
+        
 
         const fcEvents = [];
         Object.entries(courses).forEach(([date, list]) => {
             list.forEach(c => {
                 fcEvents.push({
-                    title: `${c.name}  (${c.time})`,
+                    title: c.name,
                     start: date,
-                    className: c.slots === 0 ? 'full' : 'ticketed',
-                    extendedProps: { seats: c.slots }
+                    className: 'ticketed',
+                    extendedProps: { price: c.price },
                 });
             });
         });
 
         function selectCourse(ev, dayEl, dateStr) {
-            const seats = ev.extendedProps.seats;
-            if (seats === 0) return;
+            const panel = document.getElementById('booking-action');
+
+            if (window._selectedBooking && window._selectedBooking.date === dateStr) {
+                document.querySelectorAll('.fc-day-selected').forEach(el => el.classList.remove('fc-day-selected'));
+                panel.style.display = 'none';
+                window._selectedBooking = null;
+                return;
+            }
 
             document.querySelectorAll('.fc-day-selected').forEach(el => el.classList.remove('fc-day-selected'));
             if (dayEl) dayEl.classList.add('fc-day-selected');
 
             const dateObj = new Date(dateStr + 'T00:00:00');
             const thDate = dateObj.toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: 'numeric' });
-
-            document.getElementById('booking-course-name').textContent = ev.title;
+            
+            document.getElementById('booking-course-name').textContent = `คอร์ส: ${ev.title}`;
             document.getElementById('booking-course-date').textContent = thDate;
-            document.getElementById('booking-course-seats').textContent = `ที่นั่งว่าง ${seats} ที่`;
+            document.getElementById('booking-course-price').textContent = `${ev.extendedProps.price} บาท/คน`;
 
-            const panel = document.getElementById('booking-action');
             panel.style.display = 'flex';
             panel.style.animation = 'none';
             panel.offsetHeight;
             panel.style.animation = '';
+            panel.scrollIntoView({ behavior: 'smooth', block: 'end' });
 
-            window._selectedBooking = { date: dateStr, course: ev.title, seats };
+            window._selectedBooking = { date: dateStr, course: ev.title };
         }
 
         const calendar = new FullCalendar.Calendar(calendarEl, {
@@ -183,9 +194,7 @@
             height: 'auto',
             events: fcEvents,
             eventDidMount: function(info) {
-                const seats = info.event.extendedProps.seats;
-                const seatsText = seats === 0 ? 'เต็มแล้ว' : `${seats} ที่นั่ง`;
-                info.el.setAttribute('title', `${info.event.title} — ${seatsText}`);
+                info.el.setAttribute('title', info.event.title);
             },
             dateClick: function(info) {
                 const events = calendar.getEvents().filter(e => e.startStr === info.dateStr);
@@ -195,6 +204,7 @@
             eventClick: function(info) {
                 selectCourse(info.event, info.el.closest('.fc-daygrid-day'), info.event.startStr);
             }
+            
         });
 
         calendar.render();
@@ -207,4 +217,10 @@
                 window.location.href = `checkticket.html?date=${date}&course=${encodeURIComponent(course)}`;
             });
         }
+         } catch (error) {
+            console.error('Error fetching course data:', error);
+        }
     });
+
+
+
