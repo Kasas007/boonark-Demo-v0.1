@@ -82,8 +82,6 @@
     }
     }
     customElements.define('nav-bar', NavBar);
-
-
     class Footer extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
